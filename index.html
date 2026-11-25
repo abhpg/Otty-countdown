@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ooty Trip Countdown</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(135deg, #1b4332, #2d6a4f 50%, #74c69d);
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  h1 { font-size: 2rem; margin-bottom: 4px; }
+  .sub { font-size: 1.1rem; opacity: 0.9; margin-bottom: 30px; }
+  .timer {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .box {
+    background: rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 18px 14px;
+    min-width: 85px;
+  }
+  .num { font-size: 2.6rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.85; }
+  .info { margin-top: 30px; font-size: 1rem; line-height: 1.6; opacity: 0.95; }
+  .done { font-size: 1.8rem; font-weight: 700; display: none; }
+</style>
+</head>
+<body>
+
+<h1>🌿 Ooty Trip 🌿</h1>
+<div class="sub">Kerala Express · Departs 6:48 AM</div>
+
+<div class="timer" id="timer">
+  <div class="box"><div class="num" id="d">--</div><div class="label">Days</div></div>
+  <div class="box"><div class="num" id="h">--</div><div class="label">Hours</div></div>
+  <div class="box"><div class="num" id="m">--</div><div class="label">Minutes</div></div>
+  <div class="box"><div class="num" id="s">--</div><div class="label">Seconds</div></div>
+</div>
+
+<div class="done" id="done">🚆 Journey started! Enjoy Ooty! 🚆</div>
+
+<div class="info">
+  Pack your bags, carry your IDs and tickets,<br>
+  and reach the station on time!
+</div>
+
+<script>
+  // CHANGE THIS: trip date in YYYY-MM-DD format (train departure is 6:48 AM IST)
+  const TRIP_DATE = "2026-12-10";
+
+  const target = new Date(`${TRIP_DATE}T06:48:00+05:30`).getTime();
+
+  function update() {
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      document.getElementById("timer").style.display = "none";
+      document.getElementById("done").style.display = "block";
+      return;
+    }
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    const secs = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById("d").textContent = days;
+    document.getElementById("h").textContent = String(hours).padStart(2, "0");
+    document.getElementById("m").textContent = String(mins).padStart(2, "0");
+    document.getElementById("s").textContent = String(secs).padStart(2, "0");
+  }
+
+  update();
+  setInterval(update, 1000);
+</script>
+
+</body>
+</html>
