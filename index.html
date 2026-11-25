@@ -5,64 +5,144 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ooty Trip Countdown</title>
 <style>
+  * { box-sizing: border-box; }
   body {
     margin: 0;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: linear-gradient(135deg, #1b4332, #2d6a4f 50%, #74c69d);
-    color: #fff;
-    text-align: center;
+    background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+    background-size: 300% 300%;
+    animation: bg 14s ease infinite;
+    color: #222;
     padding: 20px;
-    box-sizing: border-box;
+    text-align: center;
   }
-  h1 { font-size: 2rem; margin-bottom: 4px; }
-  .sub { font-size: 1.1rem; opacity: 0.9; margin-bottom: 30px; }
-  .timer {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    justify-content: center;
+  @keyframes bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
+  .card {
+    background: rgba(255,255,255,0.92);
+    border-radius: 20px;
+    padding: 20px;
+    max-width: 560px;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  h1 { font-size: 2rem; margin: 10px 0 4px; color: #2d3436; }
+  .sub { font-size: 1.05rem; color: #636e72; margin-bottom: 6px; }
+  .train-info {
+    display: inline-block;
+    background: #0984e3;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  .toy-train { width: 100%; max-width: 380px; height: auto; animation: chug 2.5s ease-in-out infinite; }
+  @keyframes chug {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+  .timer { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
   .box {
-    background: rgba(255,255,255,0.15);
     border-radius: 14px;
-    padding: 18px 14px;
-    min-width: 85px;
+    padding: 14px 10px;
+    min-width: 78px;
+    color: #fff;
   }
-  .num { font-size: 2.6rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.85; }
-  .info { margin-top: 30px; font-size: 1rem; line-height: 1.6; opacity: 0.95; }
-  .done { font-size: 1.8rem; font-weight: 700; display: none; }
+  .box:nth-child(1) { background: #ff6b6b; }
+  .box:nth-child(2) { background: #feca57; color: #222; }
+  .box:nth-child(3) { background: #1dd1a1; }
+  .box:nth-child(4) { background: #54a0ff; }
+  .num { font-size: 2.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+  .done { font-size: 1.6rem; font-weight: 700; display: none; color: #d63031; }
+  h2 { font-size: 1.3rem; margin: 0 0 12px; color: #2d3436; }
+  ul { text-align: left; list-style: none; padding: 0; margin: 0; }
+  li { padding: 8px 4px; border-bottom: 1px dashed #dfe6e9; font-size: 1rem; }
+  li:last-child { border-bottom: none; }
+  .note { font-size: 0.95rem; color: #636e72; margin-top: 10px; }
 </style>
 </head>
 <body>
 
-<h1>🌿 Ooty Trip 🌿</h1>
-<div class="sub">Kerala Express · Departs 6:48 AM</div>
+<div class="card">
+  <svg class="toy-train" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ooty toy train">
+    <!-- track -->
+    <rect x="0" y="150" width="400" height="6" fill="#636e72"/>
+    <rect x="20" y="156" width="360" height="4" fill="#b2bec3"/>
+    <!-- engine body -->
+    <rect x="60" y="80" width="130" height="62" rx="6" fill="#e17055"/>
+    <rect x="60" y="66" width="60" height="18" rx="4" fill="#d63031"/>
+    <!-- smoke stack -->
+    <rect x="72" y="50" width="16" height="20" fill="#2d3436"/>
+    <ellipse cx="80" cy="46" rx="14" ry="6" fill="#2d3436"/>
+    <!-- cab -->
+    <rect x="150" y="60" width="50" height="82" rx="4" fill="#00b894"/>
+    <rect x="160" y="70" width="30" height="20" fill="#dfe6e9"/>
+    <!-- window -->
+    <rect x="90" y="92" width="30" height="20" fill="#dfe6e9"/>
+    <!-- carriage -->
+    <rect x="215" y="88" width="90" height="54" rx="6" fill="#fdcb6e"/>
+    <rect x="225" y="98" width="20" height="16" fill="#dfe6e9"/>
+    <rect x="252" y="98" width="20" height="16" fill="#dfe6e9"/>
+    <rect x="279" y="98" width="20" height="16" fill="#dfe6e9"/>
+    <!-- second carriage -->
+    <rect x="312" y="88" width="70" height="54" rx="6" fill="#74b9ff"/>
+    <rect x="322" y="98" width="20" height="16" fill="#dfe6e9"/>
+    <rect x="349" y="98" width="20" height="16" fill="#dfe6e9"/>
+    <!-- wheels -->
+    <circle cx="85" cy="146" r="11" fill="#2d3436"/>
+    <circle cx="125" cy="146" r="11" fill="#2d3436"/>
+    <circle cx="170" cy="146" r="11" fill="#2d3436"/>
+    <circle cx="235" cy="146" r="10" fill="#2d3436"/>
+    <circle cx="265" cy="146" r="10" fill="#2d3436"/>
+    <circle cx="330" cy="146" r="10" fill="#2d3436"/>
+    <circle cx="365" cy="146" r="10" fill="#2d3436"/>
+    <!-- smoke puffs -->
+    <circle cx="70" cy="36" r="7" fill="#dfe6e9" opacity="0.8"/>
+    <circle cx="58" cy="26" r="5" fill="#dfe6e9" opacity="0.6"/>
+  </svg>
 
-<div class="timer" id="timer">
-  <div class="box"><div class="num" id="d">--</div><div class="label">Days</div></div>
-  <div class="box"><div class="num" id="h">--</div><div class="label">Hours</div></div>
-  <div class="box"><div class="num" id="m">--</div><div class="label">Minutes</div></div>
-  <div class="box"><div class="num" id="s">--</div><div class="label">Seconds</div></div>
+  <h1>🌿 Ooty Trip 🌿</h1>
+  <div class="sub">Sabari Express · Train No. 20630</div>
+  <div class="sub">Departs 25 Dec 2026 · 6:45 AM</div>
+  <div class="train-info">🚆 All aboard in</div>
 </div>
 
-<div class="done" id="done">🚆 Journey started! Enjoy Ooty! 🚆</div>
+<div class="card">
+  <div class="timer" id="timer">
+    <div class="box"><div class="num" id="d">--</div><div class="label">Days</div></div>
+    <div class="box"><div class="num" id="h">--</div><div class="label">Hours</div></div>
+    <div class="box"><div class="num" id="m">--</div><div class="label">Minutes</div></div>
+    <div class="box"><div class="num" id="s">--</div><div class="label">Seconds</div></div>
+  </div>
+  <div class="done" id="done">🎉 Journey started! Enjoy Ooty! 🎉</div>
+</div>
 
-<div class="info">
-  Pack your bags, carry your IDs and tickets,<br>
-  and reach the station on time!
+<div class="card">
+  <h2>🧣 Winter Packing Checklist</h2>
+  <ul>
+    <li>🧢 Woollen cap or beanie</li>
+    <li>🧥 Warm jacket or sweater (Ooty nights can get quite cold)</li>
+    <li>🧤 Gloves and a scarf</li>
+    <li>🧦 Woollen socks and closed shoes</li>
+    <li>☂️ Umbrella or light raincoat (Ooty gets sudden rain)</li>
+    <li>🕶️ Sunglasses and sunscreen (days can be sunny)</li>
+    <li>💊 Basic medicines and first-aid kit</li>
+    <li>🪪 Tickets, IDs and printed copies of bookings</li>
+    <li>🔦 Torch and power bank</li>
+  </ul>
+  <div class="note">Pack a warm layer in your hand bag for the train journey, since the morning start can feel chilly.</div>
 </div>
 
 <script>
-  // CHANGE THIS: trip date in YYYY-MM-DD format (train departure is 6:48 AM IST)
-  const TRIP_DATE = "2026-12-10";
-
-  const target = new Date(`${TRIP_DATE}T06:48:00+05:30`).getTime();
+  // CHANGE THIS: trip date in YYYY-MM-DD format. Train 20630 departs 6:45 AM IST.
+  const TRIP_DATE = "2026-12-25";
+  const target = new Date(`${TRIP_DATE}T06:45:00+05:30`).getTime();
 
   function update() {
     const diff = target - Date.now();
